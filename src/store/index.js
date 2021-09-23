@@ -176,7 +176,8 @@ export default new Vuex.Store({
             product.description
               .toLowerCase()
               .includes(state.search.toLowerCase()) ||
-            product.color.toLowerCase().includes(state.search.toLowerCase())
+            product.color.toLowerCase().includes(state.search.toLowerCase()) ||
+            product.category.toLowerCase().includes(state.search.toLowerCase())
         )
       }
     },
@@ -195,6 +196,7 @@ export default new Vuex.Store({
           description: product.description,
           price: product.price,
           discount: product.discount,
+          clearance: product.clearance,
           src: product.src,
           quantity: item.quantity
         }

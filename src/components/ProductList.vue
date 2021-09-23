@@ -78,7 +78,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .images-container {
   display: flex;
   text-align: center;

@@ -7,11 +7,35 @@
             <img :src="item.src" alt="" class="img-fluid" />
           </td>
           <td class="td-item-name align-middle">
-            <h4>
+            <h3>
               {{ item.name }}
-            </h4>
+            </h3>
             <p>{{ item.description }}</p>
-            <h5>${{ item.price.toLocaleString('de-DE') }}</h5>
+            <div>
+              <div v-if="item.clearance === true">
+                <p class="card-text product-price">
+                  <img
+                    src="../assets/coupon.png"
+                    class="img-fluid image-discount mr-2"
+                    alt="..."
+                  />
+                  ${{
+                    parseInt(
+                      item.price * (1 - item.discount / 100)
+                    ).toLocaleString('de-DE')
+                  }}
+                </p>
+                <p class="card-text product-price-without-clearance pb-3">
+                  Precio Original: ${{ item.price.toLocaleString('de-DE') }} |
+                  {{ item.discount }}% Off
+                </p>
+              </div>
+              <div v-else>
+                <p class="card-text product-price">
+                  ${{ item.price.toLocaleString('de-DE') }}
+                </p>
+              </div>
+            </div>
           </td>
           <td class="td-item-quantity align-middle">
             <button
@@ -33,7 +57,7 @@
           </td>
           <td class="td-item-price align-middle">
             <h5>Total Producto</h5>
-            <h4>
+            <h4 class="total-shopping-cart">
               ${{
                 parseInt(
                   item.price * (1 - item.discount / 100) * item.quantity
@@ -46,13 +70,20 @@
     </table>
 
     <div>
-      <h4 class="mt-5 text-right" v-if="$store.state.shoppingCart.length > 0">
+      <h4
+        class="mt-5 text-right total"
+        v-if="$store.state.shoppingCart.length > 0"
+      >
         El total a pagar es: ${{
           parseInt($store.getters['TotalAmountShoppingCart']).toLocaleString(
             'de-DE'
           )
         }}
+        <div class="container text-right">
+          <button class="btn btn-outline-primary mt-3">Pagar</button>
+        </div>
       </h4>
+
       <h4 class="mt-5" v-else>
         No tienes productos en tu carrito de compras actualmente
       </h4>
@@ -126,5 +157,22 @@ export default {
 
 .btn-delete:hover {
   color: #d454c3;
+}
+
+.image-discount {
+  height: 30px;
+}
+
+.product-price {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.total-shopping-cart {
+  font-weight: bold;
+}
+
+.total {
+  font-weight: bold;
 }
 </style>

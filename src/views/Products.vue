@@ -1,14 +1,25 @@
 <template>
   <div>
-    <div class="container">
-      <input
+    <div class="container text-right search-bar mb-3">
+      <!-- <input
         type="text"
-        placeholder="Escriba el nombre del producto"
+        placeholder="Escriba el nombre del producto / Descripción / Categoría (NBA; MLB; Populares / Color"
         style="width: 500px"
         class="search-product my-4"
         :value="$store.state.search"
         @input="$store.dispatch('setSearch', $event.target.value)"
-      />
+      /> -->
+
+      <form>
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Buscar por producto / descripción / categoría (NBA; MLB; Populares) / color"
+          aria-label="Search"
+          :value="$store.state.search"
+          @input="$store.dispatch('setSearch', $event.target.value)"
+        />
+      </form>
     </div>
     <!-- <button :value="$store.state.search">Ofertas</button> -->
     <div>
@@ -43,6 +54,18 @@ export default {
 <style scoped>
 .container {
   margin-top: 75px;
+}
+
+.search-bar {
+  margin-top: 100px;
+}
+
+form {
+  margin-top: 100px;
+}
+
+input {
+  border: 1px solid #d454c3;
 }
 
 .product-not-found {
