@@ -70,19 +70,39 @@
     </table>
 
     <div>
-      <h4
-        class="mt-5 text-right total"
-        v-if="$store.state.shoppingCart.length > 0"
-      >
-        El total a pagar es: ${{
-          parseInt($store.getters['TotalAmountShoppingCart']).toLocaleString(
-            'de-DE'
-          )
-        }}
+      <div class="mt-5 text-right" v-if="$store.state.shoppingCart.length > 0">
+        <h4 class="total">
+          El total a pagar es: ${{
+            parseInt($store.getters['totalAmountShoppingCart']).toLocaleString(
+              'de-DE'
+            )
+          }}
+        </h4>
+        <div v-if="$store.getters['totalDiscountShoppingCart'] > 0">
+          <p class="product-quantity">
+            Tienes
+            {{ $store.getters.totalQuantityInShoppingCart }} productos en tu
+            carro de compras
+            <br />
+            Estarías ahorrando ${{
+              parseInt(
+                $store.getters['totalDiscountShoppingCart']
+              ).toLocaleString('de-DE')
+            }}
+            en esta compra 😉
+          </p>
+        </div>
+        <div v-else>
+          <p class="product-quantity">
+            Tienes
+            {{ $store.getters.totalQuantityInShoppingCart }} productos en tu
+            carro de compras
+          </p>
+        </div>
         <div class="container text-right">
           <button class="btn btn-outline-primary mt-3">Pagar</button>
         </div>
-      </h4>
+      </div>
 
       <h4 class="mt-5" v-else>
         No tienes productos en tu carrito de compras actualmente
@@ -174,5 +194,10 @@ export default {
 
 .total {
   font-weight: bold;
+}
+
+.product-quantity {
+  font-size: 14px;
+  font-weight: normal;
 }
 </style>

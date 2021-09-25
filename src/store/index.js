@@ -203,16 +203,27 @@ export default new Vuex.Store({
       })
     },
 
-    TotalAmountShoppingCart(state) {
+    totalAmountShoppingCart(state) {
       return state.shoppingCart.reduce((accumulator, item) => {
         accumulator =
           accumulator + item.price * (1 - item.discount / 100) * item.quantity
         return accumulator
       }, 0)
     },
+
     totalQuantityInShoppingCart(state) {
       return state.shoppingCart.reduce((accumulator, item) => {
         accumulator = accumulator + item.quantity
+        return accumulator
+      }, 0)
+    },
+
+    totalDiscountShoppingCart(state) {
+      return state.shoppingCart.reduce((accumulator, item) => {
+        accumulator =
+          accumulator +
+          (item.price * item.quantity -
+            item.price * (1 - item.discount / 100) * item.quantity)
         return accumulator
       }, 0)
     }
