@@ -100,7 +100,9 @@
           </p>
         </div>
         <div class="container text-right">
-          <button class="btn btn-outline-primary mt-3">Pagar</button>
+          <button class="btn btn-outline-primary mt-3" @click="clickOnCheckout">
+            Comprar 😃
+          </button>
         </div>
       </div>
 
@@ -132,6 +134,11 @@ export default {
 
     removeFromShoppingCart(index) {
       this.$store.dispatch('removeProductFromShoppingCart', index)
+    },
+
+    async clickOnCheckout() {
+      await this.$store.dispatch('clickOnCheckout')
+      this.$router.push('/checkout')
     }
   }
 }

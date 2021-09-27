@@ -251,6 +251,9 @@ export default new Vuex.Store({
 
     REMOVE_PRODUCT_FROM_SHOPPING_CART(state, index) {
       state.shoppingCart.splice(index, 1)
+    },
+    CLEAR_SHOPPING_CART(state) {
+      state.shoppingCart = []
     }
   },
   actions: {
@@ -290,6 +293,15 @@ export default new Vuex.Store({
     removeProductFromShoppingCart(context, index) {
       const productIndex = context.state.shoppingCart[index]
       context.commit('REMOVE_PRODUCT_FROM_SHOPPING_CART', productIndex)
+    },
+
+    clickOnCheckout(context) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          context.commit('CLEAR_SHOPPING_CART')
+          resolve()
+        }, 1000)
+      })
     }
 
     /**
